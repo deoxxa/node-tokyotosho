@@ -1,0 +1,32 @@
+{
+  "name": "tokyotosho",
+  "description": "Search and retrieve details from Tokyo Toshokan (tokyotosho.net)",
+  "version": "0.0.1",
+  "author": {
+    "name": "Conrad Pankoff",
+    "email": "deoxxa@fknsrs.biz",
+    "url": "http://www.fknsrs.biz/"
+  },
+  "url": "http://github.com/deoxxa/node-tokyotosho",
+  "license" : "BSD",
+  "repository" : { "type":"git", "url":"git://github.com/deoxxa/node-tokyotosho.git" },
+  "keywords" : [
+    "torrent",
+    "torrents",
+    "tokyotosho",
+    "tokyo toshokan",
+    "tokyo",
+    "toshokan",
+    "search"
+  ],
+  "main": "./lib/tokyotosho",
+  "engines": {
+    "node" : ">=0.4.5"
+  },
+  "dependencies": {
+    "htmlparser": ">=1.7.3",
+    "soupselect": ">0.2.0",
+    "ent": ">=0.0.4",
+    "datejs": ">0.0.2"
+  }
+}
