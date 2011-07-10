@@ -19,24 +19,59 @@ Usage
     #!/usr/bin/env node
     
     var tokyotosho = require("tokyotosho");
+    var tt = new tokyotosho.Client("www.tokyotosho.info", 80, "/");
     
-    tokyotosho.search({terms: "rozen maiden"}, function(err, ids) {
+    tt.search({terms: "rozen maiden"}, function(err, results) {
       if (err) {
         console.warn("[-] Error performing search: " + err.message);
         return;
       }
     
-      ids.forEach(function(id) {
-        tokyotosho.details(id, function(err, entry) {
+      results.forEach(function(result) {
+        tt.details(result.id, function(err, entry) {
           if (err) {
             console.warn("[-] Error fetching details for entry: " + err.message);
             return;
           }
     
-          console.log(JSON.stringify(entry));
+          console.log("Entry " + entry.id + ": " + JSON.stringify(entry));
         });
       });
     });
+
+Details
+-------
+
+The `search` method takes two arguments: an options object and a callback in the
+form of `function(error, results)`. The `options` object can contain the fields
+`terms`, `category`, `size_min`, `size_max` (measured in MiB) and `username`,
+which refers to the submitter's username. In the callback, `error` will contain
+a `message` parameter that can be used to glean additional error information.
+`results` is an array of entries, the fields of which are `id`, `title`, `url`,
+`category`, `time`,`size`, `submitter`, `comment`, `website` and if present on
+the page, `authorized`.
+
+The `details` method takes two arguments as well, an ID and a callback in the
+form of `function(error, entry)`. `error` behaves similarly to the `error`
+object returned by  `search`. `entry` is an object with the fields `id`, `time`,
+`category`, `url`, `comment` and `website`.
+
+Fields
+------
+
+`id`: the ID assigned to the entry by Tokyo Toshokan.  
+`title`: the name of the torrent.  
+`url` is the URL of the torrent itself.  
+`category`: an object containing two parameters: `id` and `name`, where `id` is
+the numeric ID to be used in search queries and `name` is the human readable
+name of the category.  
+`time`: the time the torrent was uploaded (only accurate to within the minute).  
+`size`: the size of the torrent (this is a text field right now)  
+`submitter`: the username of the submitter of the torrent  
+`website`: the website supplied at submission time, a (right now unvalidated)
+URL  
+`comment`: the comment supplied at submission time, free text  
+`authorized`: a boolean value if present or null if not  
 
 U mad?
 ------
