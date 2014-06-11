@@ -26,7 +26,7 @@
   "dependencies": {
     "htmlparser": ">=1.7.3",
     "soupselect": ">=0.2.0",
-    "ent": ">=0.0.4",
+    "he": ">=0.4.1",
     "datejs": ">=0.0.2"
   }
 }
